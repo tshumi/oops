@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oops 商業模型升級計畫</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Morandi Palette (Soft, muted tones) -->
+    <!-- Application Structure Plan: A thematic, single-page dashboard structure. The user journey begins with a high-level vision (The "Super Human" Concept), then drills down into the three core technological pillars (Blockchain, NFT, AI Agent) that form the foundation. Each pillar section provides an explanation, its application within Oops, and the value it creates. The journey culminates in a visual, interactive timeline (The 10-Year Roadmap), synthesizing all concepts into a strategic plan. This non-linear, thematic approach allows users to explore concepts based on interest rather than following the report's linear structure, enhancing comprehension and engagement. -->
+    <!-- Visualization & Content Choices: 1. Core Concepts (Pillars): Goal=Organize/Inform. Method=Interactive Tabs with HTML/CSS icons. Interaction=Clicking tabs reveals detailed text blocks. Justification=Breaks down complex tech into digestible, user-controlled segments. 2. Value Proposition: Goal=Compare. Method=Side-by-side card layout. Interaction=Static display for easy comparison. Justification=Clearly contrasts the "Before" (problem) and "After" (solution) for each technology. 3. Roadmap: Goal=Change/Time. Method=Interactive Timeline (HTML/CSS) + Donut Chart (Chart.js). Interaction=Clicking a timeline stage updates the chart and a detailed description panel. Justification=Visually represents progress over time and connects strategic phases to specific goals and KPIs in an engaging way. Library=Chart.js for the KPI visualization. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background-color: #F4F6F9;
+            color: #4C566A;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        .tab-active {
+            border-color: #BCA297;
+            background-color: #E6EAEB;
+            color: #4C566A;
+            font-weight: 500;
+        }
+        .tab-inactive {
+            border-color: transparent;
+            color: #8C94A0;
+        }
+        .timeline-item-active {
+            transform: scale(1.05);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            border-color: #BCA297;
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <div class="container mx-auto p-4 sm:p-6 md:p-8 max-w-6xl">
+
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold text-[#4C566A] mb-2">Oops 商業模型升級計畫</h1>
+            <p class="text-lg text-[#8C94A0]">邁向AGI時代的「人類潛能加速器」互動藍圖</p>
+        </header>
+
+        <main>
+            <section id="vision" class="mb-16">
+                <h2 class="text-2xl font-bold text-center mb-2 text-[#BCA297]">核心願景</h2>
+                <h3 class="text-3xl font-bold text-center mb-8">打造新一代「超級人種」</h3>
+                <div class="bg-[#FCFBF9] backdrop-blur-sm p-8 rounded-2xl shadow-lg border border-gray-200/80">
+                    <p class="text-lg text-[#4C566A] leading-relaxed">
+                        本計畫的核心是將 Oops 從一個物理場所，轉變為一個由去中心化技術驅動、自主AI協作管理的「超級人種進化生態系」。我們旨在打破傳統醫療、健身與財富管理的界限，透過科技深度聯動，讓會員在身體、認知與財富上達到巔峰。這不僅是服務的升級，更是對會員核心資產——「人類資本」的價值重塑與賦能，為迎接AGI時代的到來做好準備。
+                    </p>
+                </div>
+            </section>
+
+            <section id="pillars" class="mb-16">
+                <h2 class="text-2xl font-bold text-center mb-2 text-[#BCA297]">三大技術支柱</h2>
+                <h3 class="text-3xl font-bold text-center mb-8">Web3+AI 的雙軌進化</h3>
+                <p class="text-center max-w-3xl mx-auto text-[#8C94A0] mb-10">
+                    我們的升級計畫圍繞三大前沿技術，從根本上解決數據所有權、效率與信任的挑戰，為未來無人化、智慧化的經濟生態奠定基礎。點擊下方頁籤，探索各項技術如何為Oops賦能。
+                </p>
+
+                <div class="flex justify-center mb-8 border-b border-gray-200">
+                    <button class="tab-button text-lg py-3 px-6 border-b-2 transition-all duration-300 ease-in-out tab-active" data-tab="blockchain">
+                        <span class="mr-2">🔗</span> 區塊鏈
+                    </button>
+                    <button class="tab-button text-lg py-3 px-6 border-b-2 transition-all duration-300 ease-in-out tab-inactive" data-tab="nft">
+                        <span class="mr-2">🖼️</span> NFT
+                    </button>
+                    <button class="tab-button text-lg py-3 px-6 border-b-2 transition-all duration-300 ease-in-out tab-inactive" data-tab="ai">
+                        <span class="mr-2">🤖</span> AI Agent
+                    </button>
+                </div>
+
+                <div id="tab-content" class="transition-opacity duration-500">
+                    <div id="content-blockchain" class="tab-pane">
+                        <div class="grid md:grid-cols-2 gap-8 items-center">
+                            <div class="bg-[#FCFBF9] p-6 rounded-2xl shadow-md border border-gray-200/80">
+                                <h4 class="text-xl font-bold mb-3">核心應用：數據主權與資產代幣化</h4>
+                                <p class="text-[#4C566A]">利用區塊鏈的去中心化與不可竄改特性，賦予會員對其最核心資產——「人類資本」（健康與認知數據）——完全的數據主權。同時，我們將創新的金融產品（如長壽債券）代幣化，釋放其流動性，降低投資門檻。</p>
+                            </div>
+                            <div class="bg-[#FCFBF9] p-6 rounded-2xl shadow-md border border-gray-200/80">
+                                <h4 class="text-xl font-bold mb-3">創造價值：建立信任與流動性</h4>
+                                <ul class="list-disc list-inside text-[#4C566A] space-y-2">
+                                    <li><span class="font-semibold">增強安全性：</span>擺脫中心化伺服器，降低數據洩露風險。</li>
+                                    <li><span class="font-semibold">確保真實性：</span>健康報告與數據記錄不可偽造，提供可信基礎。</li>
+                                    <li><span class="font-semibold">保護隱私：</span>會員可精準控制數據訪問權限。</li>
+                                    <li><span class="font-semibold">提高效率：</span>透過智能合約自動化執行金融產品規則。</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="content-nft" class="tab-pane hidden">
+                        <div class="grid md:grid-cols-2 gap-8 items-center">
+                            <div class="bg-[#FCFBF9] p-6 rounded-2xl shadow-md border border-gray-200/80">
+                                <h4 class="text-xl font-bold mb-3">核心應用：從會員權益到身分資產</h4>
+                                <p class="text-[#4C566A]">發行獨一無二的NFT會員卡，將會員身分從單純的權益憑證，轉化為可增值、可交易的數位資產。NFT不僅是進入俱樂部的鑰匙，更是參與社群治理（DAO）的投票權證，實現「共創與共榮」。</p>
+                            </div>
+                            <div class="bg-[#FCFBF9] p-6 rounded-2xl shadow-md border border-gray-200/80">
+                                <h4 class="text-xl font-bold mb-3">創造價值：打造共享所有權生態</h4>
+                                <ul class="list-disc list-inside text-[#4C566A] space-y-2">
+                                    <li><span class="font-semibold">資產化身分：</span>會員卡可在二級市場交易，其價值與品牌共同成長。</li>
+                                    <li><span class="font-semibold">獨家賦能：</span>解鎖專屬服務、活動與產品。</li>
+                                    <li><span class="font-semibold">社群治理：</span>會員不再是消費者，而是生態的股東與決策者。</li>
+                                    <li><span class="font-semibold">品牌忠誠度：</span>激發會員深度參與，形成自驅動的有機生態。</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="content-ai" class="tab-pane hidden">
+                        <div class="grid md:grid-cols-2 gap-8 items-center">
+                            <div class="bg-[#FCFBF9] p-6 rounded-2xl shadow-md border border-gray-200/80">
+                                <h4 class="text-xl font-bold mb-3">核心應用：自主神經網路服務</h4>
+                                <p class="text-[#4C566A]">將AI服務全面升級為高度自主的AI Agent，打造一個個人化的智慧服務神經網路。從認知教練到財務顧問，AI Agent將主動監測、分析並執行任務，提供超個人化的主動決策建議，實現服務的高度自動化。</p>
+                            </div>
+                            <div class="bg-[#FCFBF9] p-6 rounded-2xl shadow-md border border-gray-200/80">
+                                <h4 class="text-xl font-bold mb-3">創造價值：實現超個人化與無人化協同</h4>
+                                <ul class="list-disc list-inside text-[#4C566A] space-y-2">
+                                    <li><span class="font-semibold">主動決策顧問：</span>從被動工具進化為主動提供建議的智慧夥伴。</li>
+                                    <li><span class="font-semibold">無縫體驗：</span>自動化處理預約、報名等繁瑣行政任務。</li>
+                                    <li><span class="font-semibold">可信協作：</span>多個Agent在區塊鏈上安全互動，為AGI時代演練。</li>
+                                    <li><span class="font-semibold">提升效率：</span>讓人類專家專注於最高價值的諮詢服務。</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="roadmap">
+                <h2 class="text-2xl font-bold text-center mb-2 text-[#BCA297]">未來十年發展藍圖</h2>
+                <h3 class="text-3xl font-bold text-center mb-8">三階段進化路徑</h3>
+                 <p class="text-center max-w-3xl mx-auto text-[#8C94A0] mb-10">
+                    我們將宏觀願景具體化為一個可執行的三階段路線圖。點擊下方不同階段，查看該階段的核心目標與關鍵指標。
+                </p>
+
+                <div class="flex flex-col md:flex-row justify-center gap-6 mb-10">
+                    <button class="timeline-item p-4 border-2 rounded-lg transition-all duration-300 ease-in-out timeline-item-active" data-phase="1">
+                        <span class="text-sm font-semibold text-[#8C94A0]">第一階段 (1-3年)</span>
+                        <h4 class="text-lg font-bold">基礎設施搭建</h4>
+                    </button>
+                    <button class="timeline-item p-4 border-2 rounded-lg transition-all duration-300 ease-in-out" data-phase="2">
+                        <span class="text-sm font-semibold text-[#8C94A0]">第二階段 (3-6年)</span>
+                        <h4 class="text-lg font-bold">生態系統融合</h4>
+                    </button>
+                    <button class="timeline-item p-4 border-2 rounded-lg transition-all duration-300 ease-in-out" data-phase="3">
+                        <span class="text-sm font-semibold text-[#8C94A0]">第三階段 (6-10年)</span>
+                        <h4 class="text-lg font-bold">智慧化加速</h4>
+                    </button>
+                </div>
+
+                <div class="grid md:grid-cols-5 gap-8 items-center bg-[#FCFBF9] p-8 rounded-2xl shadow-lg border border-gray-200/80">
+                    <div class="md:col-span-3">
+                        <h4 id="roadmap-title" class="text-2xl font-bold mb-4">第一階段：基礎設施搭建</h4>
+                        <p id="roadmap-description" class="text-[#4C566A] mb-4 h-24">
+                            此階段專注於驗證核心技術的可行性。我們將搭建聯盟鏈，發行第一代NFT會員卡，並部署初版AI Agent，旨在建立初期社群、驗證數據隱私方案，並初步提升運營效率。
+                        </p>
+                        <div class="bg-[#E6EAEB] p-4 rounded-lg">
+                            <h5 class="font-semibold mb-2">核心商業目標：</h5>
+                            <ul id="roadmap-goals" class="list-disc list-inside text-[#8C94A0] text-sm space-y-1">
+                                <li>驗證區塊鏈在數據隱私與權屬方面的可行性。</li>
+                                <li>建立NFT會員制的初期社群與品牌認知。</li>
+                                <li>實現部分服務的自動化，提升運營效率。</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="md:col-span-2">
+                        <div class="chart-container">
+                            <canvas id="kpiChart"></canvas>
+                        </div>
+                        <p class="text-center text-sm text-[#8C94A0] mt-2">預期關鍵指標 (KPIs) 分佈</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="text-center mt-16 py-6 border-t border-gray-200">
+            <p class="text-[#8C94A0]">&copy; 2025 Oops - The Human Potential Accelerator. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const tabs = document.querySelectorAll('.tab-button');
+            const panes = document.querySelectorAll('.tab-pane');
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    tabs.forEach(item => {
+                        item.classList.remove('tab-active');
+                        item.classList.add('tab-inactive');
+                    });
+                    tab.classList.remove('tab-inactive');
+                    tab.classList.add('tab-active');
+
+                    const target = tab.getAttribute('data-tab');
+                    panes.forEach(pane => {
+                        if (pane.id === `content-${target}`) {
+                            pane.classList.remove('hidden');
+                        } else {
+                            pane.classList.add('hidden');
+                        }
+                    });
+                });
+            });
+
+            const roadmapData = {
+                '1': {
+                    title: '第一階段：基礎設施搭建',
+                    description: '此階段專注於驗證核心技術的可行性。我們將搭建聯盟鏈，發行第一代NFT會員卡，並部署初版AI Agent，旨在建立初期社群、驗證數據隱私方案，並初步提升運營效率。',
+                    goals: [
+                        '驗證區塊鏈在數據隱私與權屬方面的可行性。',
+                        '建立NFT會員制的初期社群與品牌認知。',
+                        '實現部分服務的自動化，提升運營效率。'
+                    ],
+                    kpis: {
+                        labels: ['NFT鑄造量', '鏈上數據增長', '任務自動化率'],
+                        data: [50, 30, 20]
+                    }
+                },
+                '2': {
+                    title: '第二階段：生態系統融合',
+                    description: '在基礎設施之上，我們將正式上線代幣化的金融產品，啟動DAO社群治理，並實現多AI Agent的協同工作。目標是創造一個正向經濟飛輪，並賦予會員真正的決策權。',
+                    goals: [
+                        '創造一個「投資-回饋-貢獻」的正向經濟飛輪。',
+                        '賦予會員真正的決策權，增強社群凝聚力。',
+                        '實現金融與健康服務的無人化、智慧化協同。'
+                    ],
+                    kpis: {
+                        labels: ['金融產品TVL', 'DAO投票參與率', 'Agent協同成功率'],
+                        data: [60, 25, 15]
+                    }
+                },
+                '3': {
+                    title: '第三階段：智慧化加速與AGI銜接',
+                    description: '此階段目標是全面釋放數據價值，形成成熟的NFT二級市場，並使AI Agent系統具備高度自主性，能無縫接入外部AGI模型，確保Oops在未來保持核心競爭力。',
+                    goals: [
+                        '數據價值全面釋放，創造新的營收模式。',
+                        'NFT會員卡成為社群認可的資產，品牌價值內化於代幣。',
+                        '具備接入AGI的技術與治理基礎設施，保持核心競爭力。'
+                    ],
+                    kpis: {
+                        labels: ['數據資產交易量', 'NFT二級市場價格', 'AGI整合案例'],
+                        data: [40, 40, 20]
+                    }
+                }
+            };
+
+            const timelineItems = document.querySelectorAll('.timeline-item');
+            const roadmapTitle = document.getElementById('roadmap-title');
+            const roadmapDescription = document.getElementById('roadmap-description');
+            const roadmapGoals = document.getElementById('roadmap-goals');
+            let kpiChart;
+
+            function updateRoadmap(phase) {
+                const data = roadmapData[phase];
+                roadmapTitle.textContent = data.title;
+                roadmapDescription.textContent = data.description;
+                
+                roadmapGoals.innerHTML = '';
+                data.goals.forEach(goal => {
+                    const li = document.createElement('li');
+                    li.textContent = goal;
+                    roadmapGoals.appendChild(li);
+                });
+
+                updateChart(data.kpis);
+
+                timelineItems.forEach(item => {
+                    if (item.getAttribute('data-phase') === phase) {
+                        item.classList.add('timeline-item-active');
+                    } else {
+                        item.classList.remove('timeline-item-active');
+                    }
+                });
+            }
+            
+            function updateChart(kpiData) {
+                if (kpiChart) {
+                    kpiChart.data.labels = kpiData.labels;
+                    kpiChart.data.datasets[0].data = kpiData.data;
+                    kpiChart.update();
+                } else {
+                    const ctx = document.getElementById('kpiChart').getContext('2d');
+                    kpiChart = new Chart(ctx, {
+                        type: 'doughnut',
+                        data: {
+                            labels: kpiData.labels,
+                            datasets: [{
+                                label: 'KPI 分佈',
+                                data: kpiData.data,
+                                backgroundColor: [
+                                    'rgba(188, 162, 151, 0.7)',
+                                    'rgba(164, 180, 195, 0.7)',
+                                    'rgba(135, 148, 161, 0.7)'
+                                ],
+                                borderColor: [
+                                    'rgba(188, 162, 151, 1)',
+                                    'rgba(164, 180, 195, 1)',
+                                    'rgba(135, 148, 161, 1)'
+                                ],
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: {
+                                legend: {
+                                    position: 'bottom',
+                                    labels: {
+                                        font: {
+                                            family: "'Noto Sans TC', sans-serif"
+                                        }
+                                    }
+                                },
+                                tooltip: {
+                                    callbacks: {
+                                        label: function(context) {
+                                            let label = context.label || '';
+                                            if (label) {
+                                                label += ': ';
+                                            }
+                                            if (context.parsed !== null) {
+                                                label += context.parsed + '%';
+                                            }
+                                            return label;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    });
+                }
+            }
+
+            timelineItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    const phase = item.getAttribute('data-phase');
+                    updateRoadmap(phase);
+                });
+            });
+
+            updateRoadmap('1');
+        });
+    </script>
+</body>
+</html>
